@@ -308,3 +308,50 @@ def main():
         plt.tight_layout()
         plt.savefig('output/wordcloud_negative.png', dpi=300, bbox_inches='tight')
         plt.close()
+
+# ========================================================================
+# PART D: INSIGHTS AND RECOMMENDATIONS
+# ========================================================================
+        
+    print("\n" + "=" * 60)
+    print("INSIGHTS AND RECOMMENDATIONS")
+    print("=" * 60)
+    
+    print("\n📊 KEY FINDINGS:")
+    print(f"  • Total reviews analyzed: {len(df)}")
+    print(f"  • Positive sentiment: {sentiment_counts.get('Positive', 0)} ({sentiment_counts.get('Positive', 0)/len(df)*100:.1f}%)")
+    print(f"  • Negative sentiment: {sentiment_counts.get('Negative', 0)} ({sentiment_counts.get('Negative', 0)/len(df)*100:.1f}%)")
+    print(f"  • Neutral sentiment: {sentiment_counts.get('Neutral', 0)} ({sentiment_counts.get('Neutral', 0)/len(df)*100:.1f}%)")
+    
+    print("\n✅ STRENGTHS (Top Positive Aspects):")
+    for i, (aspect, count) in enumerate(top_positive[:5], 1):
+        print(f"  {i}. {aspect.title()} - highly appreciated by customers")
+    
+    print("\n⚠️ AREAS FOR IMPROVEMENT (Top Negative Aspects):")
+    for i, (aspect, count) in enumerate(top_negative[:5], 1):
+        print(f"  {i}. {aspect.title()} - requires attention")
+    
+    print("\n💡 RECOMMENDATIONS:")
+    recommendations = [
+        "Focus R&D efforts on addressing the top negative aspects",
+        "Leverage positive aspects in marketing communications",
+        "Conduct deeper user research on critical pain points",
+        "Consider incremental improvements in frequently mentioned areas",
+        "Monitor sentiment trends over time for emerging issues"
+    ]
+    
+    for i, rec in enumerate(recommendations, 1):
+        print(f"  {i}. {rec}")
+    
+    # Save results to CSV
+    df.to_csv('output/analyzed_reviews.csv', index=False)
+    print("\n✓ Analysis complete! Results saved to 'output/' directory")
+    print("  - sentiment_distribution.png")
+    print("  - aspect_frequency.png")
+    print("  - aspect_sentiment.png")
+    print("  - wordcloud_positive.png")
+    print("  - wordcloud_negative.png")
+    print("  - analyzed_reviews.csv")
+
+if __name__ == "__main__":
+    main()
